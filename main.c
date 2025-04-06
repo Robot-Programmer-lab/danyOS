@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 
 int main(){
 	char command[50]; // массив для ввода комманды
@@ -7,7 +8,7 @@ int main(){
 	time_t t = time(NULL);                                                        
 	time_start = ctime(&t);               
 
-	printf("************************Welcome to danyOS*************************\n");
+	printf("************************   Welcome to danyOS   *************************\n");
 	
 	while (1 == 1){
 		printf("~user$ ");
@@ -51,11 +52,30 @@ int main(){
 			}
 			else if (calc_command[0] == '/'){
 				printf("Result = %d\n", number1 / number2);
-			}			
+			}	
+			else{
+				printf("Wrong command!\n");
+			}	
 		}
+		else if((command[0] == 't') &&(command[1] == 'i') && (command[2] == 'm') && (command[3] == 'e') && (command[4] == 'r')){
+			int timer_time = 0;
+			printf("Timer successfully!\n");
+			printf("Input time in minutes: ");
+			scanf("%d", &timer_time);
+			timer_time = timer_time * 60;		
+			printf("To continue, press any key\n");
+			getchar();	
+			printf("Timer start!\n");			
+			for (int i = 0; i < timer_time; i++){												
+				timer_time = timer_time - 1;
+				printf("Timer: %d\n",timer_time);
+				sleep(1);
+			}
+			printf("\nTime is up!\n");
+		}		                             
 		else{
 			printf("No such command!\n");
 		}		
 	}	
 	return 0;
-}
+}	
